@@ -1,0 +1,52 @@
+Simon
+
+
+Display title of the game.
+Display instructions for the player before the game begins.
+Display a way for the player to initiate a game. This will disapear after the game begins.
+Build a CSS Grid to hold my buttons.
+The board default state will show a darker-colored version of the buttons.
+
+--state variables--
+The game will generate an empty array to hold the game pattern.
+The game will generate an empty array for player pattern.
+The game will hold a turn array, and will initiate on the game's turn.
+
+The game will add one random value to the game pattern array at the beginning of the comptuer's turn.
+On the computer's turn, the board will then iterate through the game pattern array to display the pattern that the player must attempt to guess.
+The turn will switch to the player, by changing the turn . (is playing can be a state variable. When pattern is playing, the )
+At the beginning of the turn, the player array will be emptied.
+The player will then click the displayed buttons to add values to the player pattern.
+The buttons will light up (change color) when they are clicked.
+The player pattern must match the order of the game pattern each turn to continue to the next turn.
+    On the next turn, loop back up to computer's turn.
+If the player pattern does not match the game pattern, the game will end immediately.
+
+On game end:
+Display message that the game has ended.
+Log the length of the game pattern array - 1 as the score.
+If the score is higher than the High Score, log that at the new high score.
+
+
+
+The game will take turns between displaying the game pattern, and the player inputting their attempt at the sequence.
+
+The board will only accept player input after a pattern is displayed.
+
+
+
+
+/*----- constants -----*/
+
+
+/*----- app's state (variables) -----*/
+
+
+/*----- cached element references -----*/
+
+
+/*----- event listeners -----*/
+
+
+/*----- functions -----*/
+
