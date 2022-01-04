@@ -1,9 +1,27 @@
+h1 {
+    font font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+.instructions{
+
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(2, 30vmin);
+    grid-template-rows: repeat(2, 30vmin);
+}
+
 #yellow {
     background-color: yellow;
 }
 
 #red {
-    background-color: red;
+    background-color: #990000;
 }
 
 #blue {
@@ -13,3 +31,4 @@
 #green {
     background-color: green;
 }
+
