@@ -1,4 +1,5 @@
 h1 {
+    font-weight: normal;
 }
 
 body {
@@ -11,9 +12,9 @@ body {
     align-content: center;
 }
 
-.instructions{
+/* .instructions{
 
-}
+} */
 
 #start {
     height: 2vmin;

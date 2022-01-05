@@ -1,7 +1,7 @@
 /*----- constants -----*/
-const colors = [ 
+const colors = [
     {
-        color: 'green', 
+        color: 'green',
         default: '#009900',
         lit: '#1fff1f'
     },
@@ -19,100 +19,92 @@ const colors = [
         color: 'red',
         default: '#000099',
         lit: '#1f1fff'
-    }
+    },
 ];
 
-const litTime = 750
-const gapTime = 250
+const litTime = 750;
+const gapTime = 450;
 
 
 /*----- app's state (variables) -----*/
-let gamePattern = [];
-let playerPattern = [];
-let turn = 1; //1 is game, -1 is player.
-let round = 1;
-let isPlaying = false;
+let gamePattern;
+let playerPattern;
+let ignoreClicks;
+let gameActive;
 
 /*----- cached element references -----*/
 const buttonEls = Array.from(document.querySelectorAll('#board > div'));
 const startButton = document.getElementById('start'); // start button
-const scoreboard = document.getElementById('score'); // current score (equals the current round)
+const levelEl = document.getElementById('level'); // current level (equals the current round)
 
 /*----- event listeners -----*/
-startButton.addEventListener('click', (event) => {
-    gameTurn()
-}); // start game
-document.getElementById("board").addEventListener('click', event => {
-    const button = event.target;
-    const buttonIdx = buttonEls.indexOf(button);
-    playerPattern.push(buttonIdx);
-    console.log(playerPattern);
-} // player input click
-);
+startButton.addEventListener('click', handleStart); // start game
+document.getElementById("board").addEventListener('click', handlePlayerClick);
 
 /*----- functions -----*/
+init();
 
-console.log(buttonEls);
-
-function gameTurn() {
-    console.log("clicked");
-    let playerPattern = [];
-
-    gamePattern.push(Math.floor(Math.random() * 4));
-    
-    renderGamePattern();
-    changeTurn ();
-};
-
-function playerTurn () {
-    console.log("player turn");
-    changeTurn();
-};
-
-function changeTurn() {
-    turn = turn * -1;
-    if ( turn === -1) {
-        playerTurn ();
-    } else gameTurn ();
-};
+function init() {
+    gamePattern = [];
+    ignoreClicks = true;
+    gameActive = false;
+    render();
+}
 
 function render() {
+    startButton.style.visibility = gameActive ? 'hidden' : 'visible';
+    levelEl.innerHTML = gamePattern.length;
+}
 
-};
+function handleStart() {
+    gameActive = true;
+    gameTurn();
+    render();
+}
+
+function handlePlayerClick(evt) {
+    const button = evt.target;
+    const buttonIdx = buttonEls.indexOf(button);
+    if (buttonIdx === -1 || ignoreClicks || !gameActive) return;
+    playerPattern.push(buttonIdx);
+    button.style.backgroundColor = colors[buttonIdx].lit;
+    console.log('clicked');
+    setTimeout(function () {
+        button.style.backgroundColor = colors[buttonIdx].default;
+    }, 250);
+    if (correctPattern()) {
+        gameTurn();
+    }
+    render();
+}
+
+function correctPattern() {
+    return JSON.stringify(playerPattern) === JSON.stringify(gamePattern);
+}
+
+function gameTurn() {
+    playerPattern = [];
+    gamePattern.push(Math.floor(Math.random() * 4));
+    renderGamePattern();
+}
 
 function renderGamePattern() {
-    isPlaying = true;
+    ignoreClicks = true;
     let idx = 0;
-    const timerId = setInterval(function() {
-        for (let i = 0; i < gamePattern.length; i++) {
-            let litIdx = gamePattern[i];
-            buttonEls[litIdx].style.backgroundColor = colors[litIdx].lit;
+    const timerId = setInterval(function () {
+        const colorIdx = gamePattern[idx];
+        const button = buttonEls[colorIdx];
+        button.style.backgroundColor = colors[colorIdx].lit;
+        console.log(gamePattern, idx, colorIdx, button);
+        setTimeout(function () {
+            button.style.backgroundColor = colors[colorIdx].default;
+        }, litTime);
+        idx++;
+        if (idx === gamePattern.length) {
+            clearInterval(timerId);
+            setTimeout(function() {
+                ignoreClicks = false;
+            }, litTime);
         }
-    setTimeout(function() {
-        for (let i = 0; i < gamePattern.length; i++) {
-            let litIdx = gamePattern[i];
-            buttonEls[litIdx].style.backgroundColor = colors[litIdx].default;
-        }
-    }, litTime);
-    idx++;
-    if (idx === gamePattern.length) {
-      clearInterval(timerId);
-      isPlaying = false;
-      setTimeout(litTime);
-    }
-  }, litTime + gapTime);
-
-
-    // const timerID = setInterval(function(){
-    //     let litIdx = gamePattern[i];
-
-    // })
-    // for (let i = 0; i < gamePattern.length; i++) {
-    //     let litIdx = gamePattern[i]
-    //     setTimeout(function() {
-    //         buttonEls[litIdx].style.backgroundColor = colors[litIdx].lit;
-    //         buttonEls[litIdx].style.backgroundColor = colors[litIdx].default;
-    //     }, 500);
-// 
-    // }
-};
+    }, litTime + gapTime);
+}
