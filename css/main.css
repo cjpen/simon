@@ -41,10 +41,12 @@ body {
 
 #yellow {
     background-color: #999900;
+    border-bottom-left-radius: 100%;
 }
 
 #blue {
     background-color: #000099;
+    border-bottom-right-radius: 100%;
 }
 
 
