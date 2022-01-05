@@ -23,7 +23,7 @@ const colors = [
 ];
 
 const litTime = 750;
-const gapTime = 450;
+const gapTime = 250;
 
 
 /*----- app's state (variables) -----*/
@@ -45,7 +45,6 @@ document.getElementById("board").addEventListener('click', handlePlayerClick);
 init();
 
 function init() {
-    gamePattern = [];
     ignoreClicks = true;
     gameActive = false;
     render();
@@ -57,6 +56,7 @@ function render() {
 }
 
 function handleStart() {
+    gamePattern = [];
     gameActive = true;
     gameTurn();
     render();
@@ -74,8 +74,16 @@ function handlePlayerClick(evt) {
     }, 250);
     if (correctPattern()) {
         gameTurn();
+    } else if (patternError()) {
+        gameActive = false;
+        ignoreClicks = true;
     }
     render();
+}
+
+function patternError() {
+    const copyPattern = gamePattern.slice(0, playerPattern.length);
+    return JSON.stringify(copyPattern) !== JSON.stringify(playerPattern);
 }
 
 function correctPattern() {
