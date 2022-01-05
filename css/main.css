@@ -1,11 +1,12 @@
 h1 {
     font-weight: normal;
+    font-family: courier;
 }
 
 body {
     color: white;
     background-color: black;
-    font-family: monospace;
+    font-family: courier;
     display: flex;
     flex-direction: column;
     align-items: center;

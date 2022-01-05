@@ -3,26 +3,38 @@ const colors = [
     {
         color: 'green',
         default: '#009900',
-        lit: '#1fff1f'
+        lit: '#1fff1f',
+        // sound: new Audio ('../simon_sounds/green.m4a')
     },
     {
         color: 'red',
         default: '#990000',
-        lit: '#ff1f1f'
+        lit: '#ff1f1f',
+        // sound: new Audio ('../simon_sounds/red.m4a')
     },
     {
         color: 'yellow',
         default: '#999900',
-        lit: '#ffff1f'
+        lit: '#ffff1f',
+        // sound: new Audio ('../simon_sounds/yellow.m4a')
     },
     {
-        color: 'red',
+        color: 'blue',
         default: '#000099',
-        lit: '#1f1fff'
+        lit: '#1f1fff',
+        // sound: new Audio ('../simon_sounds/blue.m4a')
     },
 ];
 
-const litTime = 750;
+const sounds = [
+    new Audio ('./simon_sounds/green.m4a'),
+    new Audio ('./simon_sounds/red.m4a'),
+    new Audio ('./simon_sounds/yellow.m4a'),
+    new Audio ('./simon_sounds/blue.m4a'),
+    new Audio ('./simon_sounds/end.m4a'),
+];
+
+const litTime = 500;
 const gapTime = 250;
 
 
@@ -47,6 +59,7 @@ init();
 function init() {
     ignoreClicks = true;
     gameActive = false;
+    gamePattern = [];
     render();
 }
 
@@ -68,13 +81,14 @@ function handlePlayerClick(evt) {
     if (buttonIdx === -1 || ignoreClicks || !gameActive) return;
     playerPattern.push(buttonIdx);
     button.style.backgroundColor = colors[buttonIdx].lit;
-    console.log('clicked');
+    sounds[buttonIdx].play();
     setTimeout(function () {
         button.style.backgroundColor = colors[buttonIdx].default;
     }, 250);
     if (correctPattern()) {
         gameTurn();
     } else if (patternError()) {
+        sounds[4].play();
         gameActive = false;
         ignoreClicks = true;
     }
@@ -103,6 +117,7 @@ function renderGamePattern() {
         const colorIdx = gamePattern[idx];
         const button = buttonEls[colorIdx];
         button.style.backgroundColor = colors[colorIdx].lit;
+        sounds[colorIdx].play();
         console.log(gamePattern, idx, colorIdx, button);
         setTimeout(function () {
             button.style.backgroundColor = colors[colorIdx].default;
