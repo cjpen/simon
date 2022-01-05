@@ -15,12 +15,17 @@ body {
 
 }
 
+#start {
+    height: 2vmin;
+}
+
 #board {
     display: grid;
     grid-template-columns: repeat(2, 30vmin);
     grid-template-rows: repeat(2, 30vmin);
     gap: 1vmin;
     margin-top: 10vmin;
+    margin-bottom: 2vmin;
 }
 
 #green {
