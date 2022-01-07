@@ -6,6 +6,8 @@ Simon, a pop culture phenomenon of the 1970's and 80's, is a basic game of memor
 
 Inspired by my appreciation for Simon, I've recreated it to play as a browser game.
 
+Fun Fact: Simon was debuted in 1978 at Studio 54!
+
 #### Game Link
 
 https://cjpen.github.io/simon
