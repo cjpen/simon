@@ -3,26 +3,22 @@ const colors = [
     {
         color: 'green',
         default: '#009900',
-        lit: '#1fff1f',
-        // sound: new Audio ('../simon_sounds/green.m4a')
+        lit: '#1fff1f'
     },
     {
         color: 'red',
         default: '#990000',
-        lit: '#ff1f1f',
-        // sound: new Audio ('../simon_sounds/red.m4a')
+        lit: '#ff1f1f'
     },
     {
         color: 'yellow',
         default: '#999900',
-        lit: '#ffff1f',
-        // sound: new Audio ('../simon_sounds/yellow.m4a')
+        lit: '#ffff1f'
     },
     {
         color: 'blue',
         default: '#000099',
-        lit: '#1f1fff',
-        // sound: new Audio ('../simon_sounds/blue.m4a')
+        lit: '#1f1fff'
     },
 ];
 

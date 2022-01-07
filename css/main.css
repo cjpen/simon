@@ -13,12 +13,15 @@ body {
     align-content: center;
 }
 
-/* .instructions{
-
-} */
+.gamebuttons {
+    display: flex;
+    align-items: center;
+}
 
 #start {
-    height: 2vmin;
+    height: 2.5vmin;
+    color: white;
+    background-color: black;
 }
 
 #board {
@@ -49,6 +52,3 @@ body {
     background-color: #000099;
     border-bottom-right-radius: 100%;
 }
-
-
-
