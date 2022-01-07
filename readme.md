@@ -13,7 +13,7 @@ https://cjpen.github.io/simon
 
 ## Screen Shots
 
-! [Simon Browser Game Start] (https://i.imgur.com/gJvOck2.png)
+![Simon Browser Game Start](https://i.imgur.com/gJvOck2.png "Simon Game Board")
 
 ## Technologies Used
 
